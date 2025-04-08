@@ -53,7 +53,7 @@ func New(conf *config.WebhookConfig, t *template.Template, l *slog.Logger, httpO
 		client: client,
 		// Webhooks are assumed to respond with 2xx response codes on a successful
 		// request and 5xx response codes are assumed to be recoverable.
-		retrier: &notify.Retrier{},
+		retrier: &notify.Retrier{RetryCodes: []int{http.StatusTooManyRequests}},
 	}, nil
 }
 
